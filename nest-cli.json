@@ -1,0 +1,32 @@
+{
+  "$schema": "https://json.schemastore.org/nest-cli",
+  "collection": "@nestjs/schematics",
+  "sourceRoot": "packages/electron/src",
+  "compilerOptions": {
+    "deleteOutDir": true,
+    "webpack": true,
+    "tsConfigPath": "packages/electron/tsconfig.app.json"
+  },
+  "monorepo": true,
+  "root": "packages/electron",
+  "projects": {
+    "electron": {
+      "type": "application",
+      "root": "packages/electron",
+      "entryFile": "main",
+      "sourceRoot": "packages/electron/src",
+      "compilerOptions": {
+        "tsConfigPath": "packages/electron/tsconfig.app.json"
+      }
+    },
+    "gateway": {
+      "type": "application",
+      "root": "packages/gateway",
+      "entryFile": "main",
+      "sourceRoot": "packages/gateway/src",
+      "compilerOptions": {
+        "tsConfigPath": "packages/gateway/tsconfig.app.json"
+      }
+    }
+  }
+}
