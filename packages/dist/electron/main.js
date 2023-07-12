@@ -136,7 +136,6 @@ AppModule = _ts_decorate3([
 // src/main.ts
 var import_electron2 = require("electron");
 var import_nest_electron2 = require("@doubleshot/nest-electron");
-var import_path2 = require("path");
 process.env.ELECTRON_DISABLE_SECURITY_WARNINGS = "true";
 async function electronAppInit() {
   const isDev = !import_electron2.app.isPackaged;
@@ -164,8 +163,7 @@ async function bootstrap() {
       strategy: new import_nest_electron2.ElectronIpcTransport()
     });
     await electronApp.listen();
-    const gatewayPath = (0, import_path2.join)(import_electron2.app.getAppPath(), "../gateway/main.js");
-    console.log("app.getDir: ", gatewayPath);
+    const IS_DEV = !import_electron2.app.isPackaged;
   } catch (error) {
     import_electron2.app.quit();
   }

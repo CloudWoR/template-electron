@@ -1,10 +1,9 @@
 import { NestFactory } from '@nestjs/core';
 import { AppModule } from './app.module';
 import { MicroserviceOptions } from '@nestjs/microservices';
-import { app } from 'electron';
+import { app, dialog } from 'electron';
 import { ElectronIpcTransport } from '@doubleshot/nest-electron';
 import { exec } from 'node:child_process';
-import {} from 'fs';
 import { join } from 'path';
 process.env.ELECTRON_DISABLE_SECURITY_WARNINGS = 'true';
 
@@ -34,11 +33,17 @@ async function bootstrap() {
       });
     await electronApp.listen();
     // 启动其他子进程（微服务）
-    const gatewayPath = join(app.getAppPath(), '../gateway/main.js');
-    console.log('app.getDir: ', gatewayPath);
+    // dialog.showErrorBox('gateway: ', __dirname);
+    // dialog.showErrorBox('getAppPath: ', app.getAppPath());
+    const IS_DEV = !app.isPackaged;
+    // const gatewayPath = IS_DEV
+    //   ? join(app.getAppPath(), '../gateway/main.js')
+    //   : join(app.getAppPath(), 'backend/gateway/main.js');
+    // // console.log('app.getDir: ', gatewayPath);
     // exec(`node ${gatewayPath}`, (err, std) => {
     //   console.log('std: ', std);
     //   console.log('err: ', err);
+    //   dialog.showErrorBox('gateway: ', err.message);
     // });
   } catch (error) {
     app.quit();

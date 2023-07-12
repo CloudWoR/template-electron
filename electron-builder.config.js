@@ -12,6 +12,7 @@ const config = {
   directories: {
     output: resolve('dist'),
   },
+  asar: false,
   electronDownload: {
     mirror: 'https://npm.taobao.org/mirrors/electron/',
   },
@@ -25,6 +26,13 @@ const config = {
       from: resolve('packages/renderer/dist'),
       to: 'renderer',
     },
+  ],
+  extraResources: [
+    {
+      from: resolve('packages/configurations'),
+      to: 'assets/configurations',
+      filter: ['**/*.yaml'],
+    }
   ]
 }
 

@@ -4,7 +4,6 @@
   "sourceRoot": "packages/electron/src",
   "compilerOptions": {
     "deleteOutDir": true,
-    "webpack": true,
     "tsConfigPath": "packages/electron/tsconfig.app.json"
   },
   "monorepo": true,
@@ -25,7 +24,15 @@
       "entryFile": "main",
       "sourceRoot": "packages/gateway/src",
       "compilerOptions": {
-        "tsConfigPath": "packages/gateway/tsconfig.app.json"
+        "tsConfigPath": "packages/gateway/tsconfig.app.json",
+        "webpack": true,
+        "assets": [
+          {
+            "include": "packages/gateway/src/assets/**/*.*.yaml",
+            "outDir": "packages/dist",
+            "watchAssets": true
+          }
+        ]
       }
     }
   }

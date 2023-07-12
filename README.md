@@ -32,7 +32,55 @@ $ pnpm build
 ```
 
 ## 踩坑经历
+### 路径错误
+```json
+const { join } = require('path');
+function resolve(path) {
+  return join(__dirname, path)
+}
 
+/**
+ * @type {import('electron-builder').Configuration}
+ * @see https://www.electron.build/configuration/configuration
+ */
+const config = {
+  productName: 'Doubleshot App',
+  directories: {
+    output: resolve('dist'),
+  },
+  asar: false,
+  electronDownload: {
+    mirror: 'https://npm.taobao.org/mirrors/electron/',
+  },
+  files: [
+    resolve('package.json'),
+    {
+      from: resolve('packages/dist'),
+      to: 'backend',
+    },
+    {
+      from: resolve('packages/renderer/dist'),
+      to: 'renderer',
+    },
+  ],
+  extraResources: [
+    {
+      from: resolve('packages/configurations'),
+      to: 'assets/configurations',
+      filter: ['**/*.yaml'],
+    }
+  ]
+}
+
+module.exports = config;
+```
+需要使用nestjs功能时，需要将app.asar解压，即**electron-builder.config.js**中需要将asar设置为：false。
+
+### nestjs项目打包问题
+直接打包时，并没有将express库全部打包，需要重新安装express，并执行pnpm install命令后再次打包。
+
+
+## 自动处理静态文件
 
 
 ## License

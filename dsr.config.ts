@@ -16,7 +16,8 @@ export default defineConfig({
       name: 'gateway',
       prefixColor: 'pink',
       commands: {
-        dev: 'dsb build',
+        dev: 'npx rimraf dist && npx dsb dev',
+        // dev: 'dsb dev',
         build: 'dsb build',
       }
     },
